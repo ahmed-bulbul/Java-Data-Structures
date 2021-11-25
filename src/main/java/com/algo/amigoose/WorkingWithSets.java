@@ -1,4 +1,4 @@
-package com.algo;
+package com.algo.amigoose;
 
 import java.util.HashSet;
 import java.util.Objects;
