@@ -53,6 +53,88 @@ public class SinglyLinkedList {
         current.next = newNode;
     }
 
+    public void insertAtPosition(int data, int position){
+        if(position == 1){
+            insertAtHead(data);
+            return;
+        }
+        ListNode newNode = new ListNode(data);
+        ListNode current = head;
+        int count = 1;
+        while(current.next != null && count < position-1){
+            current = current.next;
+            count++;
+        }
+        newNode.next = current.next;
+        current.next = newNode;
+    }
+
+    public void deleteAtHead(){
+        if(head == null){
+            return;
+        }
+        head = head.next;
+    }
+
+
+
+    public void deleteAtTail(){
+        if(head == null){
+            return;
+        }
+        ListNode current = head;
+        while(current.next.next != null){
+            current = current.next;
+        }
+        current.next = null;
+    }
+
+    public void deleteAtPosition(int position){
+        if(position == 1){
+            deleteAtHead();
+            return;
+        }
+        ListNode current = head;
+        int count = 1;
+        while(current.next != null && count < position-1){
+            current = current.next;
+            count++;
+        }
+        current.next = current.next.next;
+    }
+
+    public void reverse(){
+        if(head == null){
+            return;
+        }
+        ListNode current = head;
+        ListNode prev = null;
+        while(current != null){
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    }
+
+    public void reverseRecursive(){
+        reverseRecursive(head);
+    }
+    public void reverseRecursive(ListNode current){
+        if(current == null){
+            return;
+        }
+        if(current.next == null){
+            head = current;
+            return;
+        }
+        reverseRecursive(current.next);
+        current.next.next = current;
+        current.next = null;
+    }
+
+
     public static void main(String[] args) {
         SinglyLinkedList sll = new SinglyLinkedList();
         sll.head = new ListNode(10);
@@ -73,9 +155,35 @@ public class SinglyLinkedList {
         System.out.println("\nInserting at head");
         sll.insertAtHead(3);
         sll.display();
+
         System.out.println("\nInserting at tail");
         sll.insertAtTail(12);
         sll.display();
+
+        System.out.println("\nInserting at position");
+        sll.insertAtPosition(9, 4);
+        sll.display();
+
+        System.out.println("\nDeleting at head");
+        sll.deleteAtHead();
+        sll.display();
+
+        System.out.println("\nDeleting at tail");
+        sll.deleteAtTail();
+        sll.display();
+
+        System.out.println("\nDeleting at position");
+        sll.deleteAtPosition(3);
+        sll.display();
+
+        System.out.println("\nReversing the list");
+        sll.reverse();
+        sll.display();
+
+        System.out.println("\nReversing the list recursively");
+        sll.reverseRecursive();
+        sll.display();
+
 
     }
 }
